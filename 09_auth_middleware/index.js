@@ -14,7 +14,9 @@ function printDateTime() {
   return `${date} -> ${time}`;
 }
 
-
+app.get("/", function(req,res){
+    res.sendFile(__dirname+"/public/index.html");
+})
 
 function auth(req,res,next){
     const token = req.headers.token;
