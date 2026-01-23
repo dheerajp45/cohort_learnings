@@ -12,6 +12,7 @@ app.get("/sum/:firstArg/:secondArg", function(req, res) {
 // const a= parseInt(req.query.a);
 // const b= parseInt(req.query.b); ---> ?b=123
 const a = parseInt(req.params.firstArg);
+ // http://localhost:3000/sum/5/6
 const b = parseInt(req.params.secondArg);
 ans = a + b;
 res.json({
