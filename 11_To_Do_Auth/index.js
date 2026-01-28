@@ -2,7 +2,7 @@ const express = require('express')
 const app = express();
 const PORT = 3000;
 const jwt = require('jsonwebtoken');
-app.use(express.json());
+app.use(express.json()); 
 const JWT_SECRET = "dheerajp45";
 const users =[];
 let todos = [];
