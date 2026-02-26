@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const {userRouter} = require("./routes/user")
 const {courseRouter} = require("./routes/course")
+const {adminRouter} = require("./routes/admin")
 const port = 3000
 
 app.get("/",function(req,res){
@@ -11,28 +12,7 @@ app.get("/",function(req,res){
 
 app.use("/user",userRouter)
 app.use("/course",courseRouter)
-
-
-
-
-
-
-app.post("/adminSignup",function(req,res){
-})
-
-app.post("/adminLogin",function(req,res){
-})
-
-app.post("/courseCreate",function(req,res){
-})
-
-app.delete("/courseDelete",function(req,res){
-})
-
-app.put("/addContent",function(req,res){
-})
-
-
+app.use("/admin",adminRouter)
 
 
 app.listen(port,()=>{
