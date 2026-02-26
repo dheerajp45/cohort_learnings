@@ -1,24 +1,17 @@
 const express = require("express");
 const app = express();
+const {userRouter} = require("./routes/user")
+const {courseRouter} = require("./routes/course")
 const port = 3000
+
 app.get("/",function(req,res){
     res.send("<h1>hi hello from the server</h1>")
 })
 
-app.post("/user/signup",function(req,res){
-})
 
-app.post("/user/signin",function(req,res){
-})
+app.use("/user",userRouter)
+app.use("/course",courseRouter)
 
-app.post("/user/purchases",function(req,res){
-})
-
-app.get("/courses",function(req,res){
-})
-
-app.get("/course/purchase",function(req,res){
-})
 
 
 
