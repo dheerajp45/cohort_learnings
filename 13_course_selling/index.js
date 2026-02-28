@@ -6,7 +6,7 @@ const dotenv = require("dotenv")
 const {userRouter} = require("./routes/user")
 const {courseRouter} = require("./routes/course")
 const {adminRouter} = require("./routes/admin");
-
+app.use(express.json());
 const port = 3000
 
 app.get("/",function(req,res){
