@@ -30,9 +30,6 @@ adminRouter.post("/signup",async function(req,res){
 
 
 
-
-
-
 adminRouter.post("/signin",async function(req,res){
  const { email,password } = req.body; 
    const admin =await adminModel.findOne({
@@ -57,13 +54,6 @@ adminRouter.post("/signin",async function(req,res){
       })
    }
 })
-
-
-
-
-
-
-
 
 
 adminRouter.post("/course",adminMiddleware,async function(req,res){
@@ -102,7 +92,7 @@ adminRouter.put("/course",adminMiddleware ,async function(req,res){
 
    res.json({
       message:" course updation done",
-      courseId: course._id
+      courseId: courseId
    })
 })
 
@@ -121,9 +111,14 @@ adminRouter.get("/course/bulk",adminMiddleware,async function(req,res){
    })
 })
 
-adminRouter.delete("/course",function(req,res){
+adminRouter.delete("/course",adminMiddleware,async function(req,res){
+    const adminId=req.userId;
+       const courseId = req.body.courseId;
+await courseModel.deleteOne({_id:courseId,
+      creatorId:adminId})
+
    res.json({
-      message:"admin deletion of his course endpoint"
+      message:"course deleted"
    })
 })
 

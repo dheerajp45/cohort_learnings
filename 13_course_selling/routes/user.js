@@ -2,8 +2,9 @@ const express = require("express");
 const jwt = require("jsonwebtoken");
 const Router = express.Router;
 const userRouter = Router();
-const {userModel}=require("../db");
+const {userModel, purchaseModel, courseModel}=require("../db");
 const {JWT_USER} = require("../config")
+const {userMiddleware} = require("../middlewares/user")
 // todo : store this jwt key in env file and make changes acc to that in the below code
 
 
@@ -56,9 +57,17 @@ userRouter.post("/signin",async function(req,res){
    }
 })
 
-userRouter.post("/purchases",function(req,res){
+userRouter.get("/purchases",userMiddleware,async function(req,res){
+   const userId = req.userId;
+   const purchases = await purchaseModel.find({
+      userId
+   })
+
+   const coursesData = await courseModel.find({
+      _id:{$in : purchases.map(x => x.courseId)}
+   })
       res.json({
-      message:"user purchased courses endpoint"
+      purchases,coursesData
    })
 })
 
