@@ -1,10 +1,10 @@
-require("dotenv").config();
+
 const jwt = require("jsonwebtoken");
-// const {JWT_USER} = require("../config")
+const {JWT_USER} = require("../config")
 
 function userMiddleware(req,res,next) {
     const token = req.headers.token;
-    const decoded = jwt.verify(token,process.env.JWT_USER);
+    const decoded = jwt.verify(token,JWT_USER);
 
     if(decoded){
         req.userId = decoded.id;

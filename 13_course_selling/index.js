@@ -7,7 +7,7 @@ const {userRouter} = require("./routes/user")
 const {courseRouter} = require("./routes/course")
 const {adminRouter} = require("./routes/admin");
 app.use(express.json());
-const port = 3000
+const {PORT} = require("./config")
 
 app.get("/",function(req,res){
     res.send("<h1>hi hello from the server</h1>")
@@ -30,7 +30,7 @@ async function main(){
         throw new mongoose.Error("there is not mongo db url in env variables")
     }
     await mongoose.connect(process.env.db_url);
-    app.listen(port,()=>{
+    app.listen(PORT,()=>{
     console.log("server started on port 3000");
 })
 } catch (err) {
