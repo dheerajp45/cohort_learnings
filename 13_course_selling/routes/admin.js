@@ -2,8 +2,9 @@ const express = require("express");
 const jwt = require("jsonwebtoken");
 const Router = express.Router;
 const adminRouter = Router();
-const {adminModel}=require("../db")
-const JWT_ADMIN = "dheerajp45_admin"
+const {adminModel, courseModel}=require("../db")
+const {JWT_ADMIN} = require("../config")
+const{adminMiddleware} = require("../middlewares/admin")
 // todo : store this jwt key in env file and make changes acc to that in the below code
 
 
@@ -46,7 +47,8 @@ adminRouter.post("/signin",async function(req,res){
       // todo: do cookie based authentication now it is token based
       res.json({
          message:"admin signin successfull here is the:",
-         token:token
+         token:token,
+         adminId:admin._id
       })
    }
    else{
@@ -64,9 +66,21 @@ adminRouter.post("/signin",async function(req,res){
 
 
 
-adminRouter.post("/course",function(req,res){
+adminRouter.post("/course",adminMiddleware,async function(req,res){
+
+   const adminId=req.userId;
+   const {title,description,price,imageUrl,creatorId} = req.body;
+
+   const course = await courseModel.create({
+      title,
+      description,
+      price,
+      imageUrl,
+      creatorId:adminId 
+   })
    res.json({
-      message:"admin course create endpoint"
+      message:" course creation done",
+      courseId: course._id
    })
 })
 

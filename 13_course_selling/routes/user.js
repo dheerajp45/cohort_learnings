@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken");
 const Router = express.Router;
 const userRouter = Router();
 const {userModel}=require("../db");
-const JWT_USER = "dheerajp45_user"
+const {JWT_USER} = require("../config")
 // todo : store this jwt key in env file and make changes acc to that in the below code
 
 
@@ -28,6 +28,9 @@ userRouter.post("/signup",async function(req,res){
       message:" user signup successful"
    })
 })
+
+
+
 
 userRouter.post("/signin",async function(req,res){
    const { email,password } = req.body; 

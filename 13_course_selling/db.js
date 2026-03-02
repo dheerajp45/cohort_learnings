@@ -24,7 +24,6 @@ lastName:String
 });
 
 const courseSchema = new Schema({
-email:{type:String,unique:true},
 title:String,
 description:String,
 price:Number,
