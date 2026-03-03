@@ -17,10 +17,10 @@ lastName:String,
 });
 
 const adminSchema = new Schema({
-email:{type:String,unique:true},
-password:String,
-firstName:String,
-lastName:String
+    email:{type:String,unique:true},
+    password:String,
+    firstName:String,
+    lastName:String
 });
 
 const courseSchema = new Schema({

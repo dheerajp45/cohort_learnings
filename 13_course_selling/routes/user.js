@@ -5,7 +5,7 @@ const userRouter = Router();
 const {userModel, purchaseModel, courseModel}=require("../db");
 const {JWT_USER} = require("../config")
 const {userMiddleware} = require("../middlewares/user")
-// todo : store this jwt key in env file and make changes acc to that in the below code
+
 
 
 

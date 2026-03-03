@@ -5,7 +5,7 @@ const adminRouter = Router();
 const {adminModel, courseModel}=require("../db")
 const {JWT_ADMIN} = require("../config")
 const{adminMiddleware} = require("../middlewares/admin")
-// todo : store this jwt key in env file and make changes acc to that in the below code
+
 
 
 
