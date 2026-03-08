@@ -1,13 +1,21 @@
 import { useEffect, useState } from "react"
 
 function App(){
+  const [toggle,setToggle]= useState(true)
+useEffect(()=>{
+  setInterval(()=>{
+    setToggle(prev => !prev)
+    console.log("turned on or off")
+  },5000)
+},[])
   return <div>
     hi hello
     <br />
     <b>dheeraj here</b>
-    <Counter></Counter>
-    <Stopwatch></Stopwatch>
-    <NameGame></NameGame>
+    {/* <Counter></Counter>  */}
+    {toggle &&  <Stopwatch></Stopwatch>}
+      
+    {/* <NameGame></NameGame> */}
   </div>
 }
 
@@ -55,35 +63,36 @@ function resetCount(){
   </div>
 }
 
+
 function Stopwatch(){
-  const [secs , setSecs] = useState(0);
-console.log("in stopwatch fucntion");
+  const[secs, setSecs] = useState(0);
+
+  useEffect(()=>{
+    console.log("mount done");
+    
+    let clock = setInterval(()=>{
+      setSecs(prev => prev+1)
+      console.log("hi from clock");
+    },1000);
+
+    return ()=>{
+      clearInterval(clock)
+      console.log("unmount done");
+      
+    }
+  },[]) 
 
 
-// function stopwatchStarts(){
-//  setInterval(function(){
-//     setSecs(prev => prev+1);
-//   },1000)
-// }
-
-// useEffect(function(){
-//   setInterval(function(){
-//     setSecs(prev=>prev+1)
-//   },1000)
-//   console.log("mounted");
-  
-// },[]);
- 
   return <div>
-    <h1 id="text">{secs}</h1>
-    {/* <button onClick={stopwatchStarts}>Start the Stop watch</button> */}
-  </div>
+<br /> 
+  <h1>{secs}</h1>
+  </div> 
 }
 
 
 function NameGame(){
   const [name,setName] =  useState("dheeraj");
-console.log("in name game");
+// console.log("in name game");
 
   function gowthamName(){
     setName("Gowtham")
