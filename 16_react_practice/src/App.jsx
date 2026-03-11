@@ -1,94 +1,75 @@
 import { useState } from 'react'
-
-import './App.css'
+import {PostComponent} from "./post"
+// import {users} from "./user"
+// import './App.css'
+import { Notifications_change } from './notify'
+import { ToDo } from './todo'
+import { Navbar } from './nav'
+import { Stopwatch } from './clock'
 
 function App(){
+    const [showStopwatch, setShowStopwatch] = useState(true)
+
+  const [posts , setPosts] = useState([{
+name:"Sadanand Konapur",
+ followers_Count:30 ,
+ image_link:"https://avatars.githubusercontent.com/u/197269084?v=4Y" ,time:"45m ago",
+ role:"DEVOPS ENGINEER" ,
+ isCompany:false
+  },
+  {
+    name:"Thirumalesh Pinninti",
+     followers_Count:35,
+      image_link:"https://thirumalesh.xyz/assets/Thirumalesh.webp", time:"55m ago",
+       role:"AI DEVOPS ENGINEER",
+        isCompany:false
+  },
+  {
+    name:"Google",
+     followers_Count:35,
+     image_link:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVZEZ6fa7bPwCI4HE5583rhd3qiFNmf6kiPg&s",
+      isCompany:true
+  }])
+ 
+ 
+
+
+const PostComponents = posts.map(post=>   <PostComponent 
+  name={post.name} 
+  followers_Count={post.followers_Count} 
+  image_link={post.image_link}
+  time={post.time} 
+  role={post.role}
+  isCompany={post.isCompany}></PostComponent>
+)
+  function addPost(){
+    setPosts([...posts , {
+name:"Sadanand Konapur",
+ followers_Count:30 ,
+ image_link:"https://avatars.githubusercontent.com/u/197269084?v=4Y" ,time:"45m ago",
+ role:"DEVOPS ENGINEER" ,
+ isCompany:false
+  } ])
+  }
   return <div style={{backgroundColor:"#95a5a6",height:"100vh"}}>
+    <button onClick={addPost}>Add a Post </button>
     <div style={{display:"flex", flexDirection:"column", alignItems:"center"}}>
-  <PostComponent name="Sadanand Konapur" followers_Count={30} image_link="https://avatars.githubusercontent.com/u/197269084?v=4Y" time="45m ago" role="DEVOPS ENGINEER" isCompany={false}></PostComponent>
-  <br />
-    <PostComponent name="Thirumalesh Pinninti" followers_Count={35} image_link="https://thirumalesh.xyz/assets/Thirumalesh.webp" time="55m ago" role="AI DEVOPS ENGINEER" isCompany={false}></PostComponent>
-<br />
-    <PostComponent name="Google" followers_Count={35} image_link="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVZEZ6fa7bPwCI4HE5583rhd3qiFNmf6kiPg&s" isCompany={true} ></PostComponent>
-<br />
-    </div>
-
-
-  </div>
-}
-const style = {
-  width: 300,
-  backgroundColor: "white",
-  borderRadius: 10,
-  border: "1px solid gray",
-  display: "flex",
-  flexDirection: "column",
-  padding: 15,
-  gap: 8,
-  boxShadow: "0px 2px 8px rgba(0,0,0,0.2)",
-  margin: 10
-}
-function PostComponent({name,followers_Count,image_link,time,role,isCompany}){
-
- 
-  return <div style={style}>
-
-    {/* Top row: avatar + name/role */}
-    <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-      <img
-        src={image_link}
-        style={{ width: 45, height: 45, borderRadius: "50%" }}
-      />
-      <div>
-        <div style={{display:"flex" ,gap:10, alignItems: "center"}}>
-        <b style={{ fontSize: 14 }}>{name}</b>
-        <Follow_Toggle></Follow_Toggle></div>
-        <div style={{ fontSize: 11, color: "gray" }}>{role}</div>
-        <div style={{ fontSize: 11, color: "gray" }}>{followers_Count} followers</div>
-        
-
-    {
-      time !== undefined&&
-    <div style={{ display: "flex", alignItems: "center", gap: 5 }}>
-        <div style={{ fontSize: 11, color: "gray" }}>{time}</div>
-      <img
-        src="https://cdn-icons-png.flaticon.com/512/109/109613.png"
-        style={{ height: 12, width: 12 }}
-      />
-
-    </div>
-    }
-
-      </div>
-    </div>
-
-    {/* Post content */}
-
   
-    { isCompany!==true &&
-    <div style={{ fontSize: 13, color: "#333" }}>
-      Hi, I am <b>{name}!</b>
-      I work as <b>{role} </b>
-    </div>}
-
-    {isCompany === true && 
-    <div style={{ fontSize: 13, color: "#333" }}>
-      This is a post from <b>{name}</b> company page!
+  <br />
+<br />
+  {PostComponents}
+  {/* <Notifications_change></Notifications_change> */}
+  {/* <Navbar></Navbar> */}
+  <br />
+  {/* <ToDo></ToDo> */}
+        <button onClick={() => setShowStopwatch(!showStopwatch)}>
+    Toggle Stopwatch
+  </button>
+  {showStopwatch && <Stopwatch />}
+  {/* <Stopwatch></Stopwatch> */}
     </div>
-    }
   </div>
 }
 
-function Follow_Toggle(){
-const [isFollowing , setFollowing] = useState(false);
 
-function changeFollowStatus(){
-  setFollowing(!isFollowing)
-}
-return <div>
-<button onClick={changeFollowStatus}>{isFollowing ? "Following✅" : "Follow"}</button>
- 
-</div>
-
-}
 export default App
