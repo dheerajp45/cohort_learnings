@@ -1,5 +1,5 @@
 function Home(){
-  return <div>
+  return <div style={{ backgroundColor:'CornflowerBlue'}}>
     this is home
   </div>
 }
