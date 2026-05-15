@@ -1,8 +1,9 @@
-
+import { Clock } from "./Clock"
+// import { Signup } from "./Signup"
 function App() {
- 
   return <div>
-    hi there 
+  <Clock></Clock>
   </div> 
 }
+
 export default App
