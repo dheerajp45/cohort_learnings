@@ -1,37 +1,55 @@
-import { useState } from "react"
+import React, { createContext, useContext, useState } from "react"
 
-function LightBulb(){
-     const [bulbOn, setBulbOn] = useState(true)
-    return <div>   
-        this <b>LightBulb</b> component
-        <br /> <hr></hr> <br />
-        <BulbState bulbOn = {bulbOn}></BulbState>
-        <br /> <hr></hr> <br />
-        <ToggleBulbState setBulbOn ={setBulbOn}></ToggleBulbState>
-    </div>
+const BulbContext = createContext();
+
+function BulbContextProvider({ children }) {
+
+    const [bulbOn, setBulbOn] = useState(true)
+    return <BulbContext.Provider value={{
+            bulbOn: bulbOn,
+            setBulbOn: setBulbOn
+        }}>
+            {children}
+
+        </BulbContext.Provider>
+    
 }
-
-function BulbState({bulbOn}){
+function Light() {
     return <div>
-      {
-        // bulbOn && <p>the bulb is on</p>
-        bulbOn ? <p>the bulb is on</p> : <p>the buld is off</p>
-      }
-        this is <b>BulbState</b> component
+        <BulbContextProvider>
+        this <b>Light</b> component
+        <br /> <hr></hr> <br />
+        
+            <LightBulb></LightBulb>
+            <br /> <hr></hr> <br />
+            <LightSwitch></LightSwitch>
+        </BulbContextProvider>
     </div>
 }
 
-function ToggleBulbState({setBulbOn}){
-    function changeBulbStatus(){
-        setBulbOn(c=>!c)
+function LightBulb() {
+    const { bulbOn } = useContext(BulbContext)
+    return <div>
+        {
+            bulbOn ? <p>the bulb is on</p> : <p>the bulb is off</p>
+        }
+        this is <b>LightBulb</b> component
+    </div>
+}
+
+function LightSwitch() {
+    const { setBulbOn } = useContext(BulbContext)
+    function changeBulbStatus() {
+        setBulbOn(c => !c)
     }
     return <div>
-        this is <b>ToggleBulbState</b> component
+        this is <b>LightSwitch</b> component
         <br />
         <button onClick={changeBulbStatus}>toggle the bulb</button>
     </div>
 }
 
 export {
-    LightBulb
+    Light,
+    BulbContext
 }
