@@ -1,0 +1,15 @@
+import { useRef } from "react";
+
+
+function useDeBounce(sendDataToBackend){
+    const currentClock = useRef();
+    
+function search(value){
+    clearTimeout(currentClock.current);
+    currentClock.current = setTimeout(()=>{
+      sendDataToBackend(update)
+    },2000)
+}
+return search
+}
+export {useDeBounce}

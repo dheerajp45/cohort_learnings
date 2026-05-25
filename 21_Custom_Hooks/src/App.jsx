@@ -3,13 +3,13 @@ import './App.css'
 import { Counter } from './Counter'
 import {  useFetch } from '../hooks/useFetch'
 import { usePrev } from '../hooks/usePrev';
-
+import { useDeBounce } from '../hooks/useDeBounce';
 
 
 function App() {
   // const [currentPost , setCurrentPost] = useState(1);
-const [presentValue ,setPresentValue ] = useState(0);
-const prev = usePrev(presentValue);
+// const [presentValue ,setPresentValue ] = useState(0);
+// const prev = usePrev(presentValue);
 
 // const {data,loading} = useFetch("https://jsonplaceholder.typicode.com/todos/"+currentPost);
 // if(loading){
@@ -18,9 +18,22 @@ const prev = usePrev(presentValue);
 //     <b>loading please wait.................</b>
 //   </div>
 // }
-function changePresentValue(){
-  setPresentValue(c=>c+1)
+
+
+// function changePresentValue(){
+//   setPresentValue(c=>c+1)
+// }
+const [text,setText] = useState("");
+function handleChange(event){
+  let value = event.target.value
+  setText(value);
+  toBeDeBounced(value)
 }
+
+ function sendDataToBackend(text){
+  console.log("searched in backend for "+text)
+ }
+ const toBeDeBounced = useDeBounce(sendDataToBackend)
 
  return <div>
   {/* <Counter first={6} />
@@ -30,13 +43,16 @@ function changePresentValue(){
   <button onClick={()=>setCurrentPost(3)}><b>3</b></button>
   {data.title} <br />
   {JSON.stringify(data)} */}
-  <br /><hr /> <br />
+  {/* <br /><hr /> <br />
   <b>{presentValue}</b>
   <button onClick={changePresentValue}><b>click me!!</b></button>
-  <b>the prev value was {prev}</b>
+  <b>the prev value was {prev}</b> */}
 
+<input type="text" onChange={handleChange}></input> 
 
  </div>
+
+
 }
 
 export default App
