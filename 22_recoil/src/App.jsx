@@ -1,8 +1,8 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
+
 import './App.css'
+import { Counter } from './components'
+import {RecoilRoot} from "recoil";
 
 function App() {
   const [count, setCount] = useState(0)
@@ -10,9 +10,11 @@ function App() {
   return (
    
     <>
-    hi there
+    <RecoilRoot>
+    <Counter></Counter>
+    </RecoilRoot>
     </>
   )
-}
+} 
 
 export default App
