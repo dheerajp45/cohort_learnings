@@ -4,7 +4,8 @@ import { Button } from "./button";
 
 export function Otp({number}) {
     const ref = useRef(Array(number).fill(0));
-
+    const [values,setValues] = useState(Array(number).fill(""));
+    // this thing usestate is for backspace logic for u need to send these state variables down and front goin stops after clickng backspace
 
     const [disabled, setDisabled] = useState(true);
     return <div className="flex justify-center ">
